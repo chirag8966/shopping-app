@@ -1,0 +1,19 @@
+.map-container {
+  border-radius: 10px;
+}
+
+.google-map-responsive {
+  width: calc(800vw);
+  max-width: 100vw;
+  min-height: 80vh;
+  display: flex;
+  align-items: stretch;
+}
+
+:host ::ng-deep google-map {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}

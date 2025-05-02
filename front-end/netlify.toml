@@ -1,0 +1,9 @@
+[build]
+command = "npm run build"
+build = "/dist/chirag-deltaCapital/browser"
+base= "/front-end"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

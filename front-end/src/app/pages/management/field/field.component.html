@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Field Details</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info" *ngIf="fieldId">
+            <app-recent-missions [id]="fieldId" [title]="''" />
+        </div>
+        <div class="alert alert-warning" *ngIf="!fieldId">
+            Please select a drone by clicking the search icon either in the Drone Inventory section or from the Recent Missions dashboard.
+        </div>
+    </div>
+</div>

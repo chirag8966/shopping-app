@@ -1,0 +1,51 @@
+<div class="flex">
+    <div class="w-2/6 pr-8">
+        <div class="card p-4 shadow-md">
+            <h2 class="text-xl font-semibold mb-4 text-primary">Mission Planning</h2>
+            
+            <div class="mb-4">
+                <label for="areaName" class="block text-md font-medium mb-1">Area Name</label>
+                <input id="areaName" type="text" pInputText class="w-full p-inputtext-md" placeholder="Enter area name">
+            </div>
+            
+            <div class="mb-4">
+                <label for="missionName" class="block text-md font-medium mb-1">Mission Name</label>
+                <input id="missionName" type="text" pInputText class="w-full p-inputtext-md" placeholder="Enter mission name">
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                    <label for="latitude" class="block text-md font-medium mb-1">Latitude</label>
+                    <input id="latitude" type="text" pInputText class="w-full p-inputtext-md" placeholder="Enter latitude">
+                </div>
+                <div>
+                    <label for="longitude" class="block text-md font-medium mb-1">Longitude</label>
+                    <input id="longitude" type="text" pInputText class="w-full p-inputtext-md" placeholder="Enter longitude">
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label for="frequency" class="block text-md font-medium mb-1">Frequency</label>
+                <p-dropdown id="frequency" [options]="[
+                    {label: 'Every 4 hours', value: '4h'},
+                    {label: 'Every 8 hours', value: '8h'},
+                    {label: 'Every 24 hours', value: '24h'},
+                    {label: 'Every 2 days', value: '2d'}
+                ]" optionLabel="label" styleClass="w-full p-inputtext-md"></p-dropdown>
+            </div>
+            
+            <div class="mb-6 flex items-center">
+                <p-checkbox id="repeatDaily" [binary]="true" styleClass="mr-2"></p-checkbox>
+                <label for="repeatDaily" class="text-md">Repeat Daily?</label>
+            </div>
+            
+            <div class="flex justify-end gap-2">
+                <button pButton label="Cancel" class="p-button-outlined p-button-secondary"></button>
+                <button pButton label="Save Mission" class="p-button-primary"></button>
+            </div>
+        </div>
+    </div>
+    <div class="w-full">
+        <google-map-section [center]="center" [markers]="markers" />
+    </div>
+</div>

@@ -1,0 +1,5 @@
+  <google-map [center]="center" [zoom]="zoom" [options]="mapOptions" [height]="'84vh'" [width]="'60vw'">
+    @for (marker of markers; track marker.lat) {
+      <map-marker [position]="marker" />
+    }
+  </google-map>

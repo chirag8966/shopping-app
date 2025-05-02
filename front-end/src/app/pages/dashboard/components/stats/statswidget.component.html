@@ -1,0 +1,17 @@
+@for (item of statsWidgets; track $index) {
+    <div class="col-span-12 lg:col-span-6 xl:col-span-3">
+        <div class="card mb-0 transition-all duration-200 hover:shadow-md hover:bg-surface-50 dark:hover:bg-surface-800">
+            <div class="flex justify-between mb-4">
+                <div>
+                    <span class="block text-muted-color font-medium mb-4">{{ item.name }}</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ item.count }}</div>
+                </div>
+                <div class="flex items-center justify-center bg-{{ item.color }}-100 dark:bg-{{ item.color }}-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
+                    <i class="{{ item.icon }} text-{{ item.color }}-500 !text-xl"></i>
+                </div>
+            </div>
+            <span class="text-primary font-medium">{{ item.highlight }} </span>
+            <span class="text-muted-color">{{ item.description }}</span>
+        </div>
+    </div>
+}
