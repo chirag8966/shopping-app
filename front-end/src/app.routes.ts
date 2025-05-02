@@ -14,7 +14,6 @@ export const appRoutes: Routes = [
             { path: 'management/field', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
             { path: 'management/field:id', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
             { path: 'empty', loadComponent: () => import('./app/pages/empty/empty').then(m => m.Empty) },
-            { path: 'reports', loadChildren: () => import('./app/pages/reports/reports.routes') },
         ]
     },
     { path: 'notfound', component: Notfound },
