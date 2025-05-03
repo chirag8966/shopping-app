@@ -1,0 +1,150 @@
+<p-dialog 
+    [visible]="visible()" 
+    [modal]="true" 
+    draggable="false" 
+    [resizable]="false"
+    [style]="{width: '95vw', maxWidth: '800px'}"
+    [responsive]="true"
+    header="Shopping Cart"
+    styleClass="mobile-optimized-dialog"
+    [closable]="false"
+    [closeOnEscape]="false"
+    >
+    
+    @if (cartItems().length === 0) {
+        <div class="empty-cart p-3 sm:p-5 text-center">
+            <i class="pi pi-shopping-cart empty-cart-icon text-5xl sm:text-6xl text-gray-300 mb-3 sm:mb-4"></i>
+            <h3 class="text-lg sm:text-xl mb-2">Your cart is empty</h3>
+            <p class="text-gray-500 text-sm sm:text-base mb-3 sm:mb-4">Add some products to your cart</p>
+            <button pButton label="Continue Shopping" icon="pi pi-arrow-left" (click)="hideModal()" class="p-button-outlined p-button-sm sm:p-button-md"></button>
+        </div>
+    } @else {
+        <div class="cart-items">
+            <!-- Mobile view for cart items -->
+            <div class="block sm:hidden">
+                @for (item of cartItems(); track item.product.id) {
+                    <div class="mobile-cart-item border-bottom-1 border-300 py-3 mb-2">
+                        <div class="flex items-start mb-2">
+                            <img [src]="item.product.image" [alt]="item.product.title" width="60" class="mr-3 rounded">
+                            <div class="flex-grow">
+                                <div class="font-medium">{{item.product.title}}</div>
+                                <div class="text-sm">₹{{item.product.price}} per unit</div>
+                                @if (item.product.offer) {
+                                    <div class="text-xs text-primary mt-1">
+                                        <i class="pi pi-tag mr-1"></i>
+                                        <span>{{item.product.offer.offer}} - {{item.product.offer.offerDescription}}</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <p-inputNumber 
+                                [(ngModel)]="item.quantity" 
+                                [showButtons]="true" 
+                                buttonLayout="horizontal" 
+                                [min]="1"
+                                [max]="100"
+                                [style]="{width: '110px'}"
+                                inputStyleClass="text-center"
+                                decrementButtonClass="p-button-secondary p-button-sm" 
+                                incrementButtonClass="p-button-secondary p-button-sm" 
+                                incrementButtonIcon="pi pi-plus" 
+                                decrementButtonIcon="pi pi-minus"
+                                (onInput)="updateQuantity(item)">
+                            </p-inputNumber>
+                            
+                            <div class="flex items-center">
+                                <span class="font-bold mr-2">₹{{getItemTotal(item) | number: '1.2-2'}}</span>
+                                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text p-button-sm" 
+                                        (click)="removeItem(item.product.id)"></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <!-- Desktop view for cart items -->
+            <div class="hidden sm:block">
+                <p-table [value]="cartItems()" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Product</th>
+                            <th style="width: 20%">Price</th>
+                            <th style="width: 20%">Quantity</th>
+                            <th style="width: 20%">Subtotal</th>
+                            <th style="width: 5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>
+                                <div class="flex items-center">
+                                    <img [src]="item.product.image" [alt]="item.product.title" width="50" class="mr-3 rounded">
+                                    <div>
+                                        <div class="font-medium">{{item.product.title}}</div>
+                                        @if (item.product.offer) {
+                                            <div class="text-sm text-primary">
+                                                <i class="pi pi-tag mr-1"></i>
+                                                <span>{{item.product.offer.offer}} - {{item.product.offer.offerDescription}}</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₹{{item.product.price}}</td>
+                            <td>
+                                <p-inputNumber 
+                                    [(ngModel)]="item.quantity" 
+                                    [showButtons]="true" 
+                                    buttonLayout="horizontal" 
+                                    [min]="1"
+                                    [max]="100"
+                                    decrementButtonClass="p-button-secondary" 
+                                    incrementButtonClass="p-button-secondary" 
+                                    incrementButtonIcon="pi pi-plus" 
+                                    decrementButtonIcon="pi pi-minus"
+                                    (onInput)="updateQuantity(item)">
+                                </p-inputNumber>
+                            </td>
+                            <td class="font-bold">₹{{getItemTotal(item) | number: '1.2-2'}}</td>
+                            <td>
+                                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" 
+                                        (click)="removeItem(item.product.id)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            
+            <div class="cart-summary mt-3 sm:mt-4 p-3 sm:p-4 surface-100 rounded">
+                <div class="flex justify-between mb-2">
+                    <span>Subtotal:</span>
+                    <span class="font-medium">₹{{cartTotal() | number: '1.2-2'}}</span>
+                </div>
+                @if (savings() > 0) {
+                    <div class="flex justify-between mb-2 text-green-600">
+                        <span>Savings:</span>
+                        <span class="font-medium">-₹{{savings() | number: '1.2-2'}}</span>
+                    </div>
+                }
+                <div class="flex justify-between text-lg sm:text-xl mt-2 sm:mt-3 pt-2 sm:pt-3 border-top-1 border-300">
+                    <span class="font-medium">Total:</span>
+                    <span class="font-bold">₹{{cartTotal() | number: '1.2-2'}}</span>
+                </div>
+            </div>
+            
+            <div class="cart-actions flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+                <button pButton label="Clear Cart" icon="pi pi-trash" 
+                       class="p-button-outlined p-button-danger p-button-sm sm:p-button-md" 
+                       (click)="clearCart()"></button>
+                        
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <button pButton label="Continue Shopping" icon="pi pi-arrow-left" 
+                           (click)="hideModal()" 
+                           class="p-button-outlined p-button-sm sm:p-button-md"></button>
+                </div>
+            </div>
+        </div>
+    }
+</p-dialog>

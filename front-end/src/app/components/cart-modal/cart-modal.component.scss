@@ -1,0 +1,81 @@
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  
+  .empty-cart-icon {
+    opacity: 0.5;
+  }
+}
+
+.cart-summary {
+  background-color: var(--surface-100);
+  border-radius: var(--border-radius);
+}
+
+.mobile-cart-item {
+  .p-inputnumber-buttons-horizontal .p-button.p-button-icon-only {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+:host ::ng-deep {
+  .p-dialog-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+  
+  .mobile-optimized-dialog {
+    max-height: 90vh;
+    
+    .p-dialog-content {
+      padding: 0 1rem 1rem 1rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 100px);
+      
+      @media (min-width: 640px) {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+      }
+    }
+  }
+  
+  .p-dialog-header {
+    padding: 1rem;
+    
+    @media (min-width: 640px) {
+      padding: 1.5rem;
+    }
+  }
+  
+  .p-inputnumber {
+    width: 100%;
+    max-width: 120px;
+    
+    .p-inputnumber-input {
+      text-align: center;
+    }
+    
+    &.p-inputnumber-buttons-horizontal .p-button.p-button-icon-only {
+      @media (max-width: 639px) {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+  
+  .p-datatable {
+    .p-datatable-header {
+      background-color: var(--surface-100);
+    }
+    
+    .p-datatable-tbody > tr > td {
+      vertical-align: middle;
+      
+      @media (max-width: 639px) {
+        padding: 0.5rem;
+      }
+    }
+  }
+}

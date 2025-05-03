@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { ScheduleComponent } from './planning/schedule/schedule.component';
 
 export default [
-    { path: 'missions', loadComponent: () => import('./planning/missions/missions.component').then(m => m.MissionsComponent) },
-    { path: 'schedule', component: ScheduleComponent },
+    { path: 'missions', loadComponent: () => import('./extras/missions/missions.component').then(m => m.MissionsComponent) },
+    { path: 'schedule', loadComponent: () => import('./extras/schedule/schedule.component').then(m => m.ScheduleComponent) },
     { path: '**', redirectTo: '/notfound' }
 ] as Routes;
