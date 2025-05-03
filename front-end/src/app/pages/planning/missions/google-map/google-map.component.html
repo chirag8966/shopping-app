@@ -1,5 +1,13 @@
-  <google-map [center]="center" [zoom]="zoom" [options]="mapOptions" [height]="'84vh'" [width]="'60vw'">
-    @for (marker of markers; track marker.lat) {
-      <map-marker [position]="marker" />
-    }
+  <!-- <google-map [center]="center" [zoom]="zoom"  [height]="'84vh'" [width]="'78vw'">
+  </google-map> -->
+
+  <google-map
+  height="84vh"
+  [width]="layoutService.layoutState().staticMenuDesktopInactive ? '97vw' : '78vw'  "
+  [center]="center"
+  [options]="mapOptions"
+  [zoom]="zoom">
+  @for (position of markerPositions; track position) {
+    <map-marker [position]="position" [options]="markerOptions" [label]="position.label" />
+  }
   </google-map>

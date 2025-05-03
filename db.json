@@ -1,0 +1,36 @@
+{
+    "products": [
+        {
+            "id": "apple",
+            "title": "Apple",
+            "price": 0.35
+        },
+        {
+            "id": "banana",
+            "title": "Banana",
+            "price": 0.20
+        },
+        {
+            "id": "melons",
+            "title": "Melons",
+            "price": 0.50
+        },
+        {
+            "id": "limes",
+            "title": "Limes",
+            "price": 0.15
+        }
+    ],
+    "offers": [
+        {
+            "id": "Melons",
+            "offer": "1+1",
+            "offerDescription": "buy one get one free"
+        },
+        {
+            "id": "Limes",
+            "offer": "3for2",
+            "offerDescription": "three for the price of two"
+        }
+    ]
+}

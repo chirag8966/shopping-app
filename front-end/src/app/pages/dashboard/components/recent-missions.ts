@@ -43,7 +43,7 @@ import { DronesService, Drone } from '../../../services/drones.service';
 })
 export class RecentMissions implements OnInit {
     @Input() rows: number = 5;
-    @Input() title: string = 'Recent Missions';
+    @Input() title: string = 'My Orders';
     @Input() id: string | null = null;
     products: {id: string, name: string, location: string, battery: number}[] = [];
     router = inject(Router)

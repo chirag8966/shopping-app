@@ -10,11 +10,10 @@ export const appRoutes: Routes = [
             { path: '', loadComponent: () => import('./app/pages/dashboard/dashboard').then(m => m.Dashboard) },
             { path: 'documentation', loadComponent: () => import('./app/pages/documentation/documentation').then(m => m.Documentation) },
             { path: 'planning', loadChildren: () => import('./app/pages/pages.routes') },
-            { path: 'management/inventory', loadComponent: () => import('./app/pages/management/inventory/inventory.component').then(m => m.InventoryComponent) },
+            { path: 'management/myOrders', loadComponent: () => import('./app/pages/management/my-orders/myOrders.component').then(m => m.myOrdersComponent) },
             { path: 'management/field', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
             { path: 'management/field:id', loadComponent: () => import('./app/pages/management/field/field.component').then(m => m.FieldComponent) },
             { path: 'empty', loadComponent: () => import('./app/pages/empty/empty').then(m => m.Empty) },
-            { path: 'reports', loadChildren: () => import('./app/pages/reports/reports.routes') },
         ]
     },
     { path: 'notfound', component: Notfound },
