@@ -1,0 +1,55 @@
+<div class="shop-container p-2 sm:p-4">
+    <app-cart-modal></app-cart-modal>
+
+    <!-- Header with cart summary -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-2">
+        <h1 class="text-xl sm:text-2xl font-bold text-primary">Fresh Products</h1>
+
+        <div class="cart-summary flex items-center w-full sm:w-auto justify-end">
+            @if (getCartItemCount() > 0) {
+            <div class="mr-2 sm:mr-4 text-sm sm:text-base">
+                <span class="flex items-center">
+                    <span class="font-medium">{{getCartItemCount()}}</span> 
+                    <span class="mx-1">items</span>
+                    <span class="hidden sm:inline">|</span>
+                    <span class="font-bold ml-1 sm:ml-0">₹{{getCartTotal() | number:'1.2-2'}}</span>
+                </span>
+            </div>
+            }
+            <button pButton icon="pi pi-shopping-cart" 
+                [label]="getCartItemCount() > 0 ? 'View Cart' : 'Cart Empty'"
+                [disabled]="getCartItemCount() === 0" 
+                class="p-button-rounded p-button-sm sm:p-button-md" 
+                (click)="showCart()">
+                @if (getCartItemCount() > 0) {
+                <span class="p-badge p-badge-danger">{{getCartItemCount()}}</span>
+                }
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading state -->
+    @if (loading()) {
+        <div class="flex justify-center my-4 sm:my-8">
+            <div class="loader"></div>
+        </div>
+    } @else {
+    <!-- Product grid -->
+    <div class="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        @for (product of products(); track product.id) {
+        <div class="product-card">
+            <app-product-card [product]="product" (addToCartEvent)="addToCart($event)">
+            </app-product-card>
+        </div>
+        }
+
+        <!-- Empty state -->
+        @if (products().length === 0) {
+        <div class="col-span-full text-center py-4 sm:py-8">
+            <div class="text-lg sm:text-xl text-gray-500">No products available</div>
+        </div>
+        }
+    </div>
+    }
+
+</div>

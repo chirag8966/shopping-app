@@ -20,23 +20,6 @@ export class AppMenu {
                 items: [{ label: 'Shop', icon: 'pi pi-shop', routerLink: ['/'] }]
             },
             {
-                label: 'My Orders',
-                icon: 'pi pi-fw pi-cog',
-                routerLink: ['/planning'],
-                items: [
-                    {
-                        label: 'Orders',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['management/myOrders']
-                    },
-                    {
-                        label: 'Order Items',
-                        icon: 'pi pi-fw pi-map',
-                        routerLink: ['management/field']
-                    }
-                ]
-            },
-            {
                 label: 'Wiki',
                 items: [
                     {
