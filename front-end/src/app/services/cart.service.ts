@@ -153,10 +153,17 @@ export class CartService {
         const freeBies = Math.floor(quantity / 2);
         return product.price * (quantity - freeBies);
         
-      case '3for2': // Three for the price of two
+      case '3for2': {
         const discountSets = Math.floor(quantity / 3);
         const remainder = quantity % 3;
         return product.price * (2 * discountSets + remainder);
+      } // Three for the price of two
+
+      case '6for4': {
+        const discountsSets = Math.floor(quantity / 6);
+        const remainder = quantity % 6;
+        return product.price * (4 * discountsSets + remainder);
+      }
         
       default:
         return product.price * quantity;
