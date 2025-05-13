@@ -31,6 +31,11 @@
             "offer": "1+1",
             "offerDescription": "buy one get one free"
         },
+                {
+            "id": "apple",
+            "offer": "6for4",
+            "offerDescription": "buy four get six"
+        },
         {
             "id": "Limes",
             "offer": "3for2",
